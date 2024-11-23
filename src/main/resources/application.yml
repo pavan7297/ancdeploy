@@ -15,6 +15,7 @@ spring:
         hbm2ddl.auto: update
         jdbc.lob.non_contextual_creation: true
         c3p0:
+          name: pavan
           max_size: 90
           min_size: 15
           idle_test_period: 120
