@@ -113,7 +113,7 @@ public class HibernateConfig {
 
     @Bean
     public ComboPooledDataSource productionDataSource() {
-        ComboPooledDataSource dataSource = new ComboPooledDataSource("pavan");
+        ComboPooledDataSource dataSource = new ComboPooledDataSource("defaultdb");
 
         try {
             dataSource.setDriverClass(DB_DRIVER);
