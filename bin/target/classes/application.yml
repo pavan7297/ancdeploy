@@ -1,0 +1,55 @@
+spring:
+  datasource:
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USER}
+    password: ${DATABASE_PASSWORD}
+
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL94Dialect
+        show_sql: true
+        format_sql: true
+        hbm2ddl.auto: update
+        jdbc.lob.non_contextual_creation: true
+        c3p0:
+          max_size: 90
+          min_size: 15
+          idle_test_period: 120
+          timeout: 6000
+          max_statements_per_connection: 1000
+          acquire_increment: 10
+          validate: false
+          numHelperThreads: 15
+          acquireRetryAttempts: 3
+          acquireRetryDelay: 200
+---
+spring:
+  main:
+    allow-bean-definition-overriding: true
+---
+spring:
+  main:
+    allow-circular-references: true
+---
+#spring:
+#  autoconfigure:
+#    exclude:
+#      - org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
+---
+#spring:
+#  datasource:
+#    hikari:
+#      maximum-pool-size: 10
+#      minimum-idle: 5
+#      connection-timeout: 30000
+#      idle-timeout: 30000
+#      max-lifetime: 60000
+
+
+
+#    url: jdbc:postgresql://localhost:5432/pr1
+#    username: postgres
+#    password: pavan
