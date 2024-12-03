@@ -88,24 +88,9 @@ public class MainController {
 		return wrapper;
 	}
 
-	@RequestMapping(value = "/DealerRegistration", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public Response callerrelationDetails(@RequestBody DealerRegistration objControllerDto)
-			throws InSufficientInputException, DataNotFoundException, SQLException {
-
-		String reqIdValue = "dataid1";
-		request.setAttribute("reqid", reqIdValue);
-		String strRequestID = (String) request.getAttribute("reqid");
-
-		CommonWrapper wrapper = new CommonWrapper();
-		log.info(strRequestID + "::::Data is save or not:::::INPUTS ARE::::" + objControllerDto.toString());
-
-		String listOfData = dataServices.saveDealerRegistration(objControllerDto, strRequestID);
-		wrapper.setOutput(listOfData);
-		wrapper.setResponseCode(org.springframework.http.HttpStatus.OK.value());
-		wrapper.setStatus(org.springframework.http.HttpStatus.OK.getReasonPhrase());
-		return wrapper;
-	}
-
+	
+	
+	
 	public String getClientIp(HttpServletRequest request) {
 //			"Client IP: " +
 		return (request.getHeader("X-Forwarded-For") != null ? request.getHeader("X-Forwarded-For")

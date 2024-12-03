@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: ${DATABASE_URL}
-    username: ${DATABASE_USER}
-    password: ${DATABASE_PASSWORD}
+    url: jdbc:postgresql://localhost:5432/pr1
+    username: postgres
+    password: pavan
 
     driver-class-name: org.postgresql.Driver
 
@@ -47,6 +47,10 @@ spring:
 #      idle-timeout: 30000
 #      max-lifetime: 60000
 
+
+#url: ${DATABASE_URL}
+#   username: ${DATABASE_USER}
+#   password: ${DATABASE_PASSWORD}
 
 
 #    url: jdbc:postgresql://localhost:5432/pr1
