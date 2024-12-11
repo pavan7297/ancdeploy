@@ -4,6 +4,7 @@ com\jwtAuth\model\DealerSignup.class
 com\jwtAuth\model\Countrys.class
 com\jwtAuth\model\DealerAllDetails.class
 com\jwtAuth\interceptors\CommonDataInterceptor.class
+com\jwtAuth\wrappers\BlogWrappers.class
 com\jwtAuth\model\DealerDetails.class
 com\jwtAuth\model\DealerRegistration.class
 com\jwtAuth\config\SecurityPermitAllConfig.class
@@ -14,6 +15,7 @@ com\jwtAuth\daoImpl\AppDataImpl.class
 com\jwtAuth\utils\StringUtils.class
 com\jwtAuth\wrappers\DealerSignupWrappers.class
 com\jwtAuth\services\DealerSignupServices.class
+com\jwtAuth\services\BlogServices.class
 com\jwtAuth\controller\DealerController.class
 com\jwtAuth\exceptions\DataNotFoundException.class
 com\jwtAuth\utils\IsEmptyUtil.class
@@ -32,3 +34,6 @@ com\jwtAuth\exceptions\InSufficientInputException.class
 com\jwtAuth\controller\MainController.class
 com\jwtAuth\service\impl\DealerSignupServicesImpl.class
 com\jwtAuth\utils\CommonConstants.class
+com\jwtAuth\model\Blogs.class
+com\jwtAuth\service\impl\BlogServicesImpl.class
+com\jwtAuth\controller\BlogsController.class
