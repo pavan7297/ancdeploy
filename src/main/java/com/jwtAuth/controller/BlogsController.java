@@ -48,7 +48,7 @@ public class BlogsController {
 		return wrapper;
 	}
 
-	@RequestMapping(value = "/getAllBlogs", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/getAllBlogs", method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
 	private Response getAllBlogsData() throws Exception {
 
 		String reqIdValue = "dataid1";
