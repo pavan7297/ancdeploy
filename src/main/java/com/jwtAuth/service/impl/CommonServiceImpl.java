@@ -19,6 +19,7 @@ import com.jwtAuth.exceptions.DataNotFoundException;
 import com.jwtAuth.model.Countrys;
 import com.jwtAuth.model.DealerRegistration;
 import com.jwtAuth.model.StatesModel;
+import com.jwtAuth.model.querie;
 import com.jwtAuth.services.CommonServices;
 import com.jwtAuth.utils.CommonConstants;
 
@@ -67,6 +68,7 @@ public class CommonServiceImpl implements CommonServices {
 				countrie.setCountry_id(objects[0].toString());
 			} else {
 				countrie.setCountry_id(CommonConstants.DATA_NOT_AVIALABLE);
+				
 			}
 			if (objects[1] != null) {
 				countrie.setCountry_name(objects[1].toString());
@@ -161,6 +163,107 @@ public class CommonServiceImpl implements CommonServices {
 		log.info(strRequestID + ":::::::::::::" + cs.toString());
 		String output = objAppdata.getSingleData(cs.toString());
 		return output;
+	}
+
+	@Override
+	public String querieServices(querie querie, String strRequestID) throws Exception, SQLDataException {
+		CallableStatement cs = null;
+		Connection connection = null;
+		try {
+			connection = DriverManager.getConnection(strJdbcUrl, strDBUSERNAME, strDBPWD);
+			cs = connection.prepareCall("{call add_query(?,?,?,?)}");
+			cs.setString(1, querie.getName());
+			cs.setString(2, querie.getEmail());
+			cs.setString(3, querie.getSubject());
+			cs.setString(4, querie.getMessage());
+		} catch (Exception e) {
+			System.out.print("sqlexception:::" + e);
+		} finally {
+
+			connection.close();
+
+		}
+		log.info(strRequestID + ":::::::::::::" + cs.toString());
+		return objAppdata.saveData(cs.toString());
+	}
+
+	@Override
+	public List<querie> getallquerielistService(String strRequestID) throws Exception, SQLDataException {
+		List<querie> objChecklist = null;
+		PreparedStatement cs = null;
+		Connection connection = DriverManager.getConnection(strJdbcUrl, strDBUSERNAME, strDBPWD);
+		try {
+//			connection = 
+			System.err.println("check the connections :::::::" + connection);
+			cs = connection.prepareCall("{call get_all_queries()}");
+			System.err.println("check the queary :::::::" + cs);
+		} catch (Exception e) {
+			System.out.print("sqlexception:::" + e);
+		} finally {
+			connection.close();
+		}
+		log.info("SQL QUERY :::::::::::" + cs.toString());
+		@SuppressWarnings("unchecked")
+		List<Object[]> data = (List<Object[]>) objAppdata.getData(cs.toString());
+
+		List<querie> querieList = data.stream().map((Object[] objects) -> {
+			querie querie = new querie();
+
+			if (objects[0] != null) {
+				querie.setId(Integer.parseInt(objects[0].toString()));
+			} else {
+				querie.setId(CommonConstants.DATA_NOT_AVIALABLE_INT);
+			}
+			if (objects[1] != null) {
+				querie.setName(objects[1].toString());
+			} else {
+				querie.setName(CommonConstants.DATA_NOT_AVIALABLE);
+			}
+			if (objects[2] != null) {
+				querie.setEmail(objects[2].toString());
+			} else {
+				querie.setEmail(CommonConstants.DATA_NOT_AVIALABLE);
+			}
+			if (objects[3] != null) {
+				querie.setSubject(objects[3].toString());
+			} else {
+				querie.setSubject(CommonConstants.DATA_NOT_AVIALABLE);
+			}
+			if (objects[4] != null) {
+				querie.setMessage(objects[4].toString());
+			} else {
+				querie.setMessage(CommonConstants.DATA_NOT_AVIALABLE);
+			}
+			if (objects[5] != null) {
+				querie.setTimeStamp(objects[5].toString());
+			} else {
+				querie.setTimeStamp(CommonConstants.DATA_NOT_AVIALABLE);
+			}
+			return querie;
+		}).collect(Collectors.toList());
+
+		return querieList;
+
+	}
+
+	@Override
+	public String deletequerieService(querie querie, String strRequestID) throws Exception, SQLDataException {
+		PreparedStatement cs = null;
+		Connection connection = null;
+		try {
+			connection = DriverManager.getConnection(strJdbcUrl, strDBUSERNAME, strDBPWD);
+			cs = connection.prepareCall("{call delete_query(?)}");
+			cs.setInt(1, querie.getId());
+			System.out.println(cs.toString());
+		} catch (Exception e) {
+			System.out.print("sqlexception:::" + e);
+		} finally {
+
+			connection.close();
+
+		}
+		log.info(strRequestID + ":::::::::::::" + cs.toString());
+		return objAppdata.saveData(cs.toString());
 	}
 
 }

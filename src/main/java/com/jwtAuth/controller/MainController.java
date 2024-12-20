@@ -16,12 +16,16 @@ import org.springframework.web.bind.annotation.RestController;
 import com.jwtAuth.exceptions.DataNotFoundException;
 import com.jwtAuth.exceptions.InSufficientInputException;
 import com.jwtAuth.model.Countrys;
+import com.jwtAuth.model.DealerDetails;
 import com.jwtAuth.model.DealerRegistration;
 import com.jwtAuth.model.StatesModel;
+import com.jwtAuth.model.querie;
 import com.jwtAuth.response.Response;
 import com.jwtAuth.services.CommonServices;
+import com.jwtAuth.services.DealerSignupServices;
 import com.jwtAuth.utils.IsEmptyUtil;
 import com.jwtAuth.wrappers.CommonWrapper;
+import com.jwtAuth.wrappers.DealerSignupWrappers;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -37,13 +41,15 @@ public class MainController {
 	@Autowired
 	@Qualifier("commonserviceimpl")
 	private CommonServices dataServices;
+	
 
-	@GetMapping("/wish")
+	@RequestMapping(value = "/wish", method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
 	private String wish() {
 		return "welcome to the web services";
 	}
 
-	@GetMapping("/county")
+	
+	@RequestMapping(value = "/counties", method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
 	public Response getAllCountrys() throws Exception {
 
 		String reqIdValue = "dataid1";
@@ -63,7 +69,8 @@ public class MainController {
 		return wrapper;
 	}
 
-	@GetMapping("/states")
+
+	@RequestMapping(value = "/states", method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
 	public Response getStatesByCountries(@RequestBody StatesModel states) throws Exception {
 
 		String reqIdValue = "dataid1";
@@ -87,6 +94,73 @@ public class MainController {
 
 		return wrapper;
 	}
+	
+	
+	
+	@RequestMapping(value = "/postquerie", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	private Response postQuerie(@RequestBody querie objQuerie)
+			throws Exception {
+
+		String reqIdValue = "dataid1";
+		request.setAttribute("reqid", reqIdValue);
+		String strRequestID = (String) request.getAttribute("reqid");
+
+		CommonWrapper wrapper = new CommonWrapper();
+		log.info(strRequestID + "::::Data is save or not:::::INPUTS ARE::::" + objQuerie.toString());
+
+		String listOfData = dataServices.querieServices(objQuerie, strRequestID);
+		wrapper.setDataquerie(listOfData);
+		wrapper.setResponseCode(org.springframework.http.HttpStatus.OK.value());
+		wrapper.setStatus(org.springframework.http.HttpStatus.OK.getReasonPhrase());
+		return wrapper;
+	}
+	
+	
+	
+	
+	
+	@RequestMapping(value = "/listofquries", method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
+	public Response listofquries() throws Exception {
+
+		String reqIdValue = "dataid1";
+		request.setAttribute("reqid", reqIdValue);
+		String strRequestID = (String) request.getAttribute("reqid");
+
+		List<querie> sDto = dataServices.getallquerielistService(strRequestID);
+
+		CommonWrapper wrapper = new CommonWrapper();
+		wrapper.setQueriedata(sDto);
+		wrapper.setServerIp(this.getClientIp(request));
+		wrapper.setResponseCode(org.springframework.http.HttpStatus.OK.value());
+		wrapper.setStatus(org.springframework.http.HttpStatus.OK.getReasonPhrase());
+
+		log.info(strRequestID + ":::::OUTPUT:::::" + wrapper.toString());
+
+		return wrapper;
+	}
+
+	
+
+	@RequestMapping(value = "/deletequries", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public Response deletequries(@RequestBody querie querie) throws Exception {
+
+		String reqIdValue = "dataid1";
+		request.setAttribute("reqid", reqIdValue);
+		String strRequestID = (String) request.getAttribute("reqid");
+
+		String sDto = dataServices.deletequerieService(querie, strRequestID);
+
+		CommonWrapper wrapper = new CommonWrapper();
+		wrapper.setDataquerie(sDto);
+		wrapper.setServerIp(this.getClientIp(request));
+		wrapper.setResponseCode(org.springframework.http.HttpStatus.OK.value());
+		wrapper.setStatus(org.springframework.http.HttpStatus.OK.getReasonPhrase());
+
+		log.info(strRequestID + ":::::OUTPUT:::::" + wrapper.toString());
+
+		return wrapper;
+	}
+	
 
 	
 	

@@ -26,6 +26,7 @@ public class AppDataImpl implements AppData {
 		Session session = null;
 		List<Object[]> listData = null;
 		session = sessionFactory.getCurrentSession();
+		System.out.println("session::::::::::::"+session);
 		listData = session.createNativeQuery(strQuery).list();
 		return listData;
 	}
