@@ -100,7 +100,71 @@ public class SuperAdminServiceImpl implements SuperAdminServices{
 		String output = objAppdata.getSingleData(cs.toString());
 		return output;
 	}
+
 	
+	
+	@Override
+	public String userPercentageServices(String strRequestID) throws Exception, SQLDataException {
+		CallableStatement cs = null;
+		Connection connection = null;
+		try {
+			connection = DriverManager.getConnection(strJdbcUrl, strDBUSERNAME, strDBPWD);
+			cs = connection.prepareCall("{call get_user_percentage_change()}");
+			
+		} catch (Exception e) {
+			System.out.print("sqlexception:::" + e);
+		} finally {
+
+			connection.close();
+
+		}
+		log.info(strRequestID + ":::::::::::::" + cs.toString());
+		String output = objAppdata.getSingleData(cs.toString());
+		return output;
+	}
+
+	
+	@Override
+	public String dealerPercentageServices(String strRequestID) throws Exception, SQLDataException {
+		CallableStatement cs = null;
+		Connection connection = null;
+		try {
+			connection = DriverManager.getConnection(strJdbcUrl, strDBUSERNAME, strDBPWD);
+			cs = connection.prepareCall("{call get_dealer_percentage_change()}");
+			
+		} catch (Exception e) {
+			System.out.print("sqlexception:::" + e);
+		} finally {
+
+			connection.close();
+
+		}
+		log.info(strRequestID + ":::::::::::::" + cs.toString());
+		String output = objAppdata.getSingleData(cs.toString());
+		return output;
+	}
+
+	
+	@Override
+	public String totalfundsPercentageServices(String strRequestID) throws Exception, SQLDataException {
+		CallableStatement cs = null;
+		Connection connection = null;
+		try {
+			connection = DriverManager.getConnection(strJdbcUrl, strDBUSERNAME, strDBPWD);
+			cs = connection.prepareCall("{call get_total_funds_percentage_change()}");
+			
+		} catch (Exception e) {
+			System.out.print("sqlexception:::" + e);
+		} finally {
+
+			connection.close();
+
+		}
+		log.info(strRequestID + ":::::::::::::" + cs.toString());
+		String output = objAppdata.getSingleData(cs.toString());
+		return output;
+	}
+
 
 
 }

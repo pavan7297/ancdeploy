@@ -49,7 +49,7 @@ public class MainController {
 	}
 
 	
-	@RequestMapping(value = "/counties", method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/country", method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
 	public Response getAllCountrys() throws Exception {
 
 		String reqIdValue = "dataid1";

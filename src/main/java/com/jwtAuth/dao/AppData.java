@@ -11,6 +11,8 @@ public interface AppData {
 	public String saveData(String strQuery);
 
 	public String getSingleData(String strQuery) throws DataNotFoundException;
+	
+	public String executeStoredProcedure(String strProcedureQuery, Object[] params);
 
 }
 

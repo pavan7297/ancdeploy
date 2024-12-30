@@ -96,5 +96,66 @@ public class SuperAdmin {
 
 		return wrapper;
 	}
+	
+	
+	
+	@RequestMapping(value = "/userspercentage", method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
+	public Response usersPercentage() throws Exception {
 
+		String reqIdValue = "dataid1";
+		request.setAttribute("reqid", reqIdValue);
+		String strRequestID = (String) request.getAttribute("reqid");
+		
+		String sDto = superadminServices.getTotalFunds(strRequestID);
+
+		SuperAdminWrappers wrapper = new SuperAdminWrappers();
+		wrapper.setTotalFunds(sDto);
+		wrapper.setResponseCode(org.springframework.http.HttpStatus.OK.value());
+		wrapper.setStatus(org.springframework.http.HttpStatus.OK.getReasonPhrase());
+
+		log.info(strRequestID + ":::::OUTPUT:::::" + wrapper.toString());
+
+		return wrapper;
+	}
+	
+	
+	@RequestMapping(value = "/dealerPercentage", method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
+	public Response dealerPercentage() throws Exception {
+
+		String reqIdValue = "dataid1";
+		request.setAttribute("reqid", reqIdValue);
+		String strRequestID = (String) request.getAttribute("reqid");
+		
+		String sDto = superadminServices.dealerPercentageServices(strRequestID);
+
+		SuperAdminWrappers wrapper = new SuperAdminWrappers();
+		wrapper.setTotalFunds(sDto);
+		wrapper.setResponseCode(org.springframework.http.HttpStatus.OK.value());
+		wrapper.setStatus(org.springframework.http.HttpStatus.OK.getReasonPhrase());
+
+		log.info(strRequestID + ":::::OUTPUT:::::" + wrapper.toString());
+
+		return wrapper;
+	}
+	
+	@RequestMapping(value = "/totalfundsPercentage", method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
+	public Response totalfundsPercentage() throws Exception {
+
+		String reqIdValue = "dataid1";
+		request.setAttribute("reqid", reqIdValue);
+		String strRequestID = (String) request.getAttribute("reqid");
+		
+		String sDto = superadminServices.totalfundsPercentageServices(strRequestID);
+
+		SuperAdminWrappers wrapper = new SuperAdminWrappers();
+		wrapper.setTotalFunds(sDto);
+		wrapper.setResponseCode(org.springframework.http.HttpStatus.OK.value());
+		wrapper.setStatus(org.springframework.http.HttpStatus.OK.getReasonPhrase());
+
+		log.info(strRequestID + ":::::OUTPUT:::::" + wrapper.toString());
+
+		return wrapper;
+	}
+
+	
 }

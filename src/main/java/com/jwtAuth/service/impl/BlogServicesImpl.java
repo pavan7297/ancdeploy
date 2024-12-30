@@ -47,11 +47,13 @@ public  class BlogServicesImpl implements BlogServices{
 		Connection connection = null;
 		try {
 			connection = DriverManager.getConnection(strJdbcUrl, strDBUSERNAME, strDBPWD);
-			cs = connection.prepareCall("{call create_blog(?,?,?,?)}");
-			cs.setString(1, blogs.getBlogtitle());
-			cs.setString(2, blogs.getBlogdescription());
-			cs.setString(3, blogs.getBlogcategory());
-			cs.setString(4, blogs.getBlogimgurl());
+			cs = connection.prepareCall("{call create_blog(?,?,?,?,?)}");
+			cs.setString(1, blogs.getUsername());
+			cs.setString(2, blogs.getBlogtitle());
+			cs.setString(3, blogs.getBlogdescription());
+			cs.setString(4, blogs.getBlogcategory());
+			cs.setString(5, blogs.getBlogimgurl());
+			
 		} catch (Exception e) {
 			System.out.print("sqlexception:::" + e);
 		} finally {
@@ -117,6 +119,11 @@ public  class BlogServicesImpl implements BlogServices{
 			} else {
 				blog.setBlogdateandtime(CommonConstants.DATA_NOT_AVIALABLE);
 			}
+			if (objects[6] != null) {
+				blog.setUsername(objects[6].toString());
+			} else {
+				blog.setUsername(CommonConstants.DATA_NOT_AVIALABLE);
+			}
 			return blog;
 		}).collect(Collectors.toList());
 
@@ -133,7 +140,7 @@ public  class BlogServicesImpl implements BlogServices{
 		try {
 
 			cs = connection.prepareCall("{call get_blog_by_id(?)}");
-			cs.setString(1, blogs.getBlogid());
+			cs.setString(1, blogs.getBlogid().toString());
 			
 		} catch (Exception e) {
 			System.out.print("sqlexception:::" + e);
@@ -170,12 +177,17 @@ public  class BlogServicesImpl implements BlogServices{
 			if (objects[4] != null) {
 				blog.setBlogcategory(objects[4].toString());
 			} else {
-				blog.setBlogdateandtime(CommonConstants.DATA_NOT_AVIALABLE);
+				blog.setBlogcategory(CommonConstants.DATA_NOT_AVIALABLE);
 			}
 			if (objects[5] != null) {
 				blog.setBlogimgurl(objects[5].toString());
 			} else {
-				blog.setBlogdateandtime(CommonConstants.DATA_NOT_AVIALABLE);
+				blog.setBlogimgurl(CommonConstants.DATA_NOT_AVIALABLE);
+			}
+			if (objects[6] != null) {
+				blog.setUsername(objects[6].toString());
+			} else {
+				blog.setUsername(CommonConstants.DATA_NOT_AVIALABLE);
 			}
 			return blog;
 		}).collect(Collectors.toList());

@@ -68,9 +68,9 @@ public class DealerSignupServicesImpl implements DealerSignupServices {
 			DealerSignup sign = new DealerSignup();
 
 			if (objects[0] != null) {
-				sign.setId(objects[0].toString());
+				sign.setUserid(objects[0].toString());
 			} else {
-				sign.setId(CommonConstants.DATA_NOT_AVIALABLE);
+				sign.setUserid(CommonConstants.DATA_NOT_AVIALABLE);
 			}
 			if (objects[1] != null) {
 				sign.setMessage(objects[1].toString());

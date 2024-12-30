@@ -9,7 +9,7 @@ import lombok.Data;
 @JsonInclude(Include.NON_NULL)
 public class DealerSignup {
 
-	private String id;
+	private String userid;
 	private String username;
 	private String email;
 	private String password;

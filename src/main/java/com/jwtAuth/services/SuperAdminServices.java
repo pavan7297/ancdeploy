@@ -16,6 +16,15 @@ public interface SuperAdminServices {
 	public String getTotalFunds(String strRequestID) throws Exception, SQLDataException;
 	
 	
+	public String userPercentageServices(String strRequestID) throws Exception, SQLDataException;
+	
+	public String dealerPercentageServices(String strRequestID) throws Exception, SQLDataException;
+	
+	public String totalfundsPercentageServices(String strRequestID) throws Exception, SQLDataException;
+	
+	
+	
+	
 	
 	
 }

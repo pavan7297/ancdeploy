@@ -15,5 +15,6 @@ public class Blogs {
 	private String blogdateandtime;
 	private String blogcategory;
 	private String blogimgurl;
+	private String username;
 
 }

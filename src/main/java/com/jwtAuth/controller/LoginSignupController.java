@@ -37,7 +37,7 @@ public class LoginSignupController {
 	@Qualifier("DealerRegsserviceimpl")
 	private DealerSignupServices dataServices;
 
-	@RequestMapping(value = "/DealerRegistrationsignup", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/signup", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	private Response dealerRegisration(@RequestBody DealerSignup objDealerSignup)
 			throws InSufficientInputException, DataNotFoundException, SQLException {
 
@@ -55,7 +55,7 @@ public class LoginSignupController {
 		return wrapper;
 	}
 
-	@RequestMapping(value = "/Dealerlogin", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	private Response dealerLogin(@RequestBody DealerLogin objDealerSignup)
 			throws InSufficientInputException, DataNotFoundException, SQLException {
 
